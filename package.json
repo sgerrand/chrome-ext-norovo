@@ -1,0 +1,14 @@
+{
+  "name": "norovo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Chrome extension that hides Atlassian Rovo UI.",
+  "license": "GPL-3.0-only",
+  "type": "module",
+  "scripts": {
+    "lint": "web-ext lint --source-dir=. --self-hosted"
+  },
+  "devDependencies": {
+    "web-ext": "^8.3.0"
+  }
+}
