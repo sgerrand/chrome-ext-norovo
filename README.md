@@ -97,7 +97,7 @@ script match, no telemetry.
 
 ## Development
 
-No build step. The repo root **is** the extension:
+The runtime extension lives at the repo root:
 
 ```
 manifest.json   # MV3 manifest
@@ -106,9 +106,46 @@ popup.html      # toolbar popup markup
 popup.js        # popup toggle logic
 ```
 
-Edit a file, then click the reload icon for NoRovo on
+Tooling uses [Bun](https://bun.sh) as the package manager and script
+runner:
+
+```bash
+bun install        # install dev dependencies
+bun run lint       # web-ext lint + ESLint
+bun run build      # produce .web-ext-artifacts/<name>-<version>.zip
+```
+
+Edit a runtime file, then click the reload icon for NoRovo on
 `chrome://extensions` to pick up changes. For content-script changes,
 also hard-refresh any open Atlassian tab.
+
+## Releases
+
+Releases are driven by [release-please](https://github.com/googleapis/release-please)
+via the [release-baton](https://github.com/release-baton/release-baton)
+reusable workflow:
+
+1. Merge a Conventional Commit to `main` (`feat:`, `fix:`, `feat!:`,
+   etc.).
+2. The `Release` workflow opens or updates a release pull request that
+   bumps the version in `package.json`, `manifest.json`, and
+   `.release-please-manifest.json`, and regenerates `CHANGELOG.md`.
+3. Merging the release PR creates a git tag and a GitHub release.
+4. The `Release asset` workflow runs on release publication, calls
+   `bun run build`, and attaches the packaged extension zip to the
+   release.
+
+### Prerequisites
+
+The org that hosts this repository must have a Release Baton GitHub
+App registered and installed on the repo, with the following secrets
+configured at the organization level:
+
+- `RELEASE_BATON_CLIENT_ID`
+- `RELEASE_BATON_PRIVATE_KEY`
+
+See the [release-baton README](https://github.com/release-baton/release-baton#installation)
+for the one-time org setup.
 
 ## Contributing
 
