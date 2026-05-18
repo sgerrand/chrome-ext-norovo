@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/sgerrand/chrome-ext-norovo/compare/v0.1.0...v0.1.1) (2026-05-18)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump web-ext from 8.10.0 to 10.1.0 ([#1](https://github.com/sgerrand/chrome-ext-norovo/issues/1)) ([e2c089f](https://github.com/sgerrand/chrome-ext-norovo/commit/e2c089f5fc67da7ede030138b5b16a4338032889))
+
 ## 0.1.0 (2026-05-18)
 
 Initial release.
