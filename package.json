@@ -6,9 +6,15 @@
   "license": "GPL-3.0-only",
   "type": "module",
   "scripts": {
-    "lint": "web-ext lint --source-dir=. --self-hosted"
+    "lint": "bun run lint:ext && bun run lint:js",
+    "lint:ext": "web-ext lint --source-dir=. --self-hosted",
+    "lint:js": "eslint ."
   },
   "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.20.0",
+    "eslint-plugin-no-unsanitized": "^4.1.2",
+    "globals": "^15.14.0",
     "web-ext": "^8.3.0"
   }
 }
