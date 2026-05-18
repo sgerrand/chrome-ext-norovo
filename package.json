@@ -12,7 +12,7 @@
     "build": "web-ext build --source-dir=. --artifacts-dir=.web-ext-artifacts --overwrite-dest --ignore-files=package.json bun.lock bun.lockb node_modules/** .github/** .gitignore eslint.config.js release-please-config.json .release-please-manifest.json CHANGELOG.md README.md .web-ext-artifacts/**"
   },
   "devDependencies": {
-    "@eslint/js": "^9.20.0",
+    "@eslint/js": "^10.0.1",
     "eslint": "^9.20.0",
     "eslint-plugin-no-unsanitized": "^4.1.2",
     "globals": "^15.14.0",
