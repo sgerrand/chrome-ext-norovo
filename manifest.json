@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "NoRovo",
+  "version": "0.0.0",
+  "description": "Disable Rovo when using Atlassian products.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "NoRovo"
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://*.atlassian.net/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}
