@@ -10,7 +10,7 @@ const SELECTORS = [
 
 const SELECTOR_LIST = SELECTORS.join(",\n");
 
-const CSS = `${SELECTOR_LIST} { display: none !important; }`;
+const STYLE_RULES = `${SELECTOR_LIST} { display: none !important; }`;
 
 let observer = null;
 
@@ -18,7 +18,7 @@ function injectStyle() {
   if (document.getElementById(STYLE_ID)) return;
   const style = document.createElement("style");
   style.id = STYLE_ID;
-  style.textContent = CSS;
+  style.textContent = STYLE_RULES;
   (document.head || document.documentElement).appendChild(style);
 }
 
