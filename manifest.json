@@ -1,13 +1,15 @@
 {
   "manifest_version": 3,
   "name": "NoRovo",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Disable Rovo when using Atlassian products.",
   "action": {
     "default_popup": "popup.html",
     "default_title": "NoRovo"
   },
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "norovo@sgerrand.dev"
@@ -15,8 +17,12 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.atlassian.net/*"],
-      "js": ["content.js"],
+      "matches": [
+        "https://*.atlassian.net/*"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_start",
       "all_frames": true
     }
