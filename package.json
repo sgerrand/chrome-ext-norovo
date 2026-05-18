@@ -8,7 +8,8 @@
   "scripts": {
     "lint": "bun run lint:ext && bun run lint:js",
     "lint:ext": "web-ext lint --source-dir=. --self-hosted",
-    "lint:js": "eslint ."
+    "lint:js": "eslint .",
+    "build": "web-ext build --source-dir=. --artifacts-dir=.web-ext-artifacts --overwrite-dest --ignore-files=package.json bun.lock bun.lockb node_modules/** .github/** .gitignore eslint.config.js release-please-config.json .release-please-manifest.json CHANGELOG.md README.md .web-ext-artifacts/**"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
