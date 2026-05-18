@@ -8,6 +8,11 @@
     "default_title": "NoRovo"
   },
   "permissions": ["storage"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "norovo@sgerrand.dev"
+    }
+  },
   "content_scripts": [
     {
       "matches": ["https://*.atlassian.net/*"],
