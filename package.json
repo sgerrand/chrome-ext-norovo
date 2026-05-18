@@ -6,16 +6,25 @@
   "license": "GPL-3.0-only",
   "type": "module",
   "scripts": {
-    "lint": "bun run lint:ext && bun run lint:js",
-    "lint:ext": "web-ext lint --source-dir=. --self-hosted",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "bun run scripts/build.ts && web-ext build --source-dir=dist --artifacts-dir=.web-ext-artifacts --overwrite-dest",
+    "lint": "bun run typecheck && bun run lint:js && bun run build && bun run lint:ext",
     "lint:js": "eslint .",
-    "build": "web-ext build --source-dir=. --artifacts-dir=.web-ext-artifacts --overwrite-dest --ignore-files=package.json bun.lock bun.lockb node_modules/** .github/** .gitignore eslint.config.js release-please-config.json .release-please-manifest.json CHANGELOG.md README.md .web-ext-artifacts/**"
+    "lint:ext": "web-ext lint --source-dir=dist --self-hosted"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@types/chrome": "^0.0.290",
     "eslint": "^9.20.0",
     "eslint-plugin-no-unsanitized": "^4.1.2",
     "globals": "^15.14.0",
+    "jsdom": "^26.0.0",
+    "sinon-chrome": "^3.0.1",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.20.0",
+    "vitest": "^3.0.0",
     "web-ext": "^10.1.0"
   }
 }
