@@ -18,12 +18,21 @@ Atlassian workspace stays focused.
 
 ## Install (unpacked)
 
-1. Clone or download this repository.
+1. Clone this repository and install dependencies:
+   ```bash
+   bun install
+   bun run build
+   ```
 2. Open `chrome://extensions` in Chrome.
 3. Enable **Developer mode** (toggle in the top-right).
-4. Click **Load unpacked** and select this repo's root directory.
+4. Click **Load unpacked** and select the `dist/` directory produced
+   by `bun run build`.
 5. Visit `https://<your-tenant>.atlassian.net` — Rovo UI should be
    hidden.
+
+Alternatively, download `norovo-<version>.zip` from a [GitHub
+release](https://github.com/sgerrand/chrome-ext-norovo/releases),
+unpack it, and **Load unpacked** the unpacked folder.
 
 A Chrome Web Store listing is planned but not yet available.
 
@@ -97,27 +106,32 @@ script match, no telemetry.
 
 ## Development
 
-The runtime extension lives at the repo root:
-
 ```
-manifest.json   # MV3 manifest
-content.js      # injects CSS + runs MutationObserver
-popup.html      # toolbar popup markup
-popup.js        # popup toggle logic
+manifest.json         # MV3 manifest (source)
+src/content.ts        # injects CSS + runs MutationObserver
+src/popup.ts          # popup toggle logic
+src/popup.html        # toolbar popup markup
+scripts/build.ts      # bundles TS to dist/ via Bun
+tests/                # Vitest + jsdom + sinon-chrome
+dist/                 # build output (gitignored, loaded into Chrome)
 ```
 
 Tooling uses [Bun](https://bun.sh) as the package manager and script
-runner:
+runner, with [Vitest](https://vitest.dev) for tests:
 
 ```bash
-bun install        # install dev dependencies
-bun run lint       # web-ext lint + ESLint
-bun run build      # produce .web-ext-artifacts/<name>-<version>.zip
+bun install         # install dev dependencies
+bun run typecheck   # tsc --noEmit
+bun run test        # vitest run
+bun run test:watch  # vitest in watch mode
+bun run build       # bundle src/ → dist/ and produce
+                    # .web-ext-artifacts/<name>-<version>.zip
+bun run lint        # typecheck + ESLint + build + web-ext lint
 ```
 
-Edit a runtime file, then click the reload icon for NoRovo on
-`chrome://extensions` to pick up changes. For content-script changes,
-also hard-refresh any open Atlassian tab.
+Edit a `src/` file, then run `bun run build` and click the reload icon
+for NoRovo on `chrome://extensions` to pick up the rebuilt `dist/`. For
+content-script changes, also hard-refresh any open Atlassian tab.
 
 ## Releases
 
