@@ -151,10 +151,38 @@ for the one-time org setup.
 
 Issues and pull requests welcome, especially:
 
-- Selectors verified against live Atlassian tenants (paste the
-  `data-testid` and a screenshot of the element).
+- Selectors verified against live Atlassian tenants — see
+  [Selector reconnaissance](#selector-reconnaissance) below.
 - Bug reports for false positives (unrelated UI disappearing).
 - Reports of Rovo entry points NoRovo misses.
+
+### Selector reconnaissance
+
+The 0.1.x selectors are intentionally broad. To help tighten them in
+0.2.0, the repo ships a paste-into-DevTools snippet that searches the
+DOM for several AI-related substrings (Atlassian's actual Rovo markup
+uses identifiers like `conversation-assistant` and `ai-mate` rather
+than just `rovo`) and reports each candidate with its attributes,
+text, CSS path, and a short ancestor trail so you can pick the right
+wrapper to hide.
+
+1. **Toggle NoRovo OFF** in the popup and reload the tab — otherwise
+   the extension hides Rovo before the snippet can see it.
+2. Open a Confluence page, Jira issue, or Atlassian Start tab where
+   Rovo is visible (the floating chat launcher, "Ask Rovo" buttons,
+   side panel, etc.).
+3. Open DevTools (Cmd+Opt+I / Ctrl+Shift+I) and switch to the
+   **Console**.
+4. Paste the contents of [`tools/selector-recon.js`](tools/selector-recon.js)
+   and press Enter.
+5. The snippet prints a summary, copies a JSON dump to the clipboard,
+   and returns it for inspection. Paste the JSON into a NoRovo issue.
+
+The snippet detects whether NoRovo is currently active on the page
+and warns you if you forgot step 1.
+
+The snippet is read-only: it does not modify the page, install
+listeners, or contact the network.
 
 ## License
 
