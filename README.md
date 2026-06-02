@@ -159,8 +159,12 @@ Issues and pull requests welcome, especially:
 ### Selector reconnaissance
 
 The 0.1.x selectors are intentionally broad. To help tighten them in
-0.2.0, the repo ships a paste-into-DevTools snippet that dumps every
-candidate Rovo node on a live Atlassian page.
+0.2.0, the repo ships a paste-into-DevTools snippet that searches the
+DOM for several AI-related substrings (Atlassian's actual Rovo markup
+uses identifiers like `conversation-assistant` and `ai-mate` rather
+than just `rovo`) and reports each candidate with its attributes,
+text, CSS path, and a short ancestor trail so you can pick the right
+wrapper to hide.
 
 1. **Toggle NoRovo OFF** in the popup and reload the tab — otherwise
    the extension hides Rovo before the snippet can see it.
